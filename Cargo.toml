@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "rpi_server",
+    "macros",
+]
