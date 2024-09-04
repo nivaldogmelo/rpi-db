@@ -1,7 +1,7 @@
 use std::{error::Error, sync::Arc};
 
 use network::Server;
-use storage::{BincodeDB, JsonDB};
+use storage::JsonDB;
 use tokio::sync::RwLock;
 
 pub mod core;
@@ -16,10 +16,7 @@ pub struct Database {
 
 impl Database {
     pub fn build(repl_addr: &str) -> Result<Database, Box<dyn Error>> {
-	// let db = Arc::new(RwLock::new(
-	//     JsonFlushEverySaveDB::new("./data.json").unwrap(),
-	// ));
-	let db = Arc::new(RwLock::new(BincodeDB::new("./data.bin").unwrap()));
+	let db = Arc::new(RwLock::new(JsonDB::new("./data.json").unwrap()));
 
 	let server = Server::build(repl_addr, db);
 
